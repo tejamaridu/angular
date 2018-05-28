@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-    <script src="../../scripts/11OtherDirectives&Bootstrap.js"></script>
+    <script src="../../scripts/12Filters.js"></script>
   </head>
   <body ng-app="myApp">
     <br>
@@ -20,8 +20,29 @@
       </form>
 
       <div class="row">
-        <div class="col-lg-2"> Emp id </div>
-        <div class="col-lg-2"> {{empId}} </div>
+        <div class="col-lg-2"> Name (View Filter) </div>
+        <div class="col-lg-2"> {{name | uppercase}} </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-lg-2"> Name (Controller Filter) </div>
+        <div class="col-lg-2"> {{NAME}} </div>
+      </div>
+	  
+      <div class="row">
+        <div class="col-lg-2"> Salary (View)</div>
+        <div class="col-lg-2"> {{sal | number:4}} </div>
+      </div>
+	  
+      <div class="row">
+        <div class="col-lg-2"> Salary (View)</div>
+        <div class="col-lg-2"> {{sal | currency:"USD":1}} </div>
+      </div>
+	  
+      <div class="row">
+        <div class="col-lg-2"> DOB</div>
+        <div class="col-lg-2"> {{dob | date:'medium'}} </div>
+		<div class="col-lg-2"> {{1288323623006 | date:'MM/dd/yyyy'}} </div>
       </div>
     </div>
   </body>
