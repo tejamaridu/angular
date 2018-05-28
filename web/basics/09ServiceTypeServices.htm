@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Using WebServices in AnglarJS</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="../../scripts/09ServiceTypeServices.js"></script>
+  </head>
+  <body ng-app="myApp">
+    <div ng-controller="emp">
+      <input ng-model="x">
+      <input ng-model="y">
+      <br>
+      Sum is {{sum}}
+      <br>
+      <button ng-click="doSum()">Get Sum</button>
+    </div>
+  </body>
+</html>
