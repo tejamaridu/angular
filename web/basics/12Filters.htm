@@ -18,31 +18,11 @@
         </div>
         <button ng-click="doSearch();" class="btn-primary"> Search </button>
       </form>
-
-        <div class="row">
-          <div class="col-lg-2"> Emp id </div>
-          <div class="col-lg-2"> {{empId}} </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-2"> Name </div>
-          <div class="col-lg-2"> {{name}} </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-2"> Age </div>
-          <div class="col-lg-2"> {{age}} </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-2"> Salary </div>
-          <div class="col-lg-2"> {{sal}}
-            <span ng-if="sal > 30000" class="glyphicon glyphicon-star"></span>
-            <span ng-show="sal > 30000" class="glyphicon glyphicon-star"></span>
-            <span ng-hide="sal < 35000" class="glyphicon glyphicon-asterisk"></span>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-2"> City </div>
-          <div class="col-lg-2"> {{city}} </div>
-        </div>
+      
+      <div class="row">
+        <div class="col-lg-2"> Emp id </div>
+        <div class="col-lg-2"> {{empId}} </div>
+      </div>
     </div>
   </body>
 </html>
