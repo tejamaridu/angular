@@ -12,14 +12,31 @@ app.controller('emp', ['$scope', 'calService', '$http', '$log', '$filter', funct
       $scope.sal = r.sal;
       $scope.city = r.city;
     });
-  }
+}
+
+$scope.getEmployees = function(){
+  calService.fetchEmployees(function(r){
+    $scope.employees = r;
+});
+}
 }]);
 
 app.service('calService', ['$http', '$log', function($http, $log){
   // With restfull web services
    this.getEmpById = function(empId, cb){
      $http({
-       url: 'http://localhost:8080/webServies/resources/utils/empById?empId=' +empId,
+       url: 'http://localhost:8080/webServices/resources/utils/empById?empId=' +empId,
+       method: 'GET'
+     }).then(function(resp){
+       cb(resp.data);
+     }, function(resp){
+       cb('Error occurred!!');
+     })
+   }
+
+   this.fetchEmployees = function(cb){
+     $http({
+       url: 'http://localhost:8080/webServices/resources/utils/sampleListJson',
        method: 'GET'
      }).then(function(resp){
        cb(resp.data);

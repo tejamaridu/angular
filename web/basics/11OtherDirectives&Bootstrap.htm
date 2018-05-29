@@ -44,6 +44,11 @@
           <div class="col-lg-2"> {{city}} </div>
         </div>
 
+        <div class="row">
+          <div class="col-lg-2"> DOB</div>
+          <div class="col-lg-2"> {{dob | date:'medium'}} </div>
+        </div>
+
         <br>
 
         <button ng-click="getEmployees();" class="btn-success"> Get Employees </button>
@@ -58,6 +63,7 @@
               <td>Age</td>
               <td>Sal</td>
               <td>City</td>
+              <td>DOB</td>
             </tr>
           </thead>
           <tr ng-repeat="empObj in employees">
@@ -66,6 +72,7 @@
             <td>{{empObj.age}}</td>
             <td>{{empObj.sal}}</td>
             <td>{{empObj.city}}</td>
+            <td>{{empObj.dob | date:'medium'}}</td>
           </tr>
         </table>
     </div>

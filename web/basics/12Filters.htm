@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>AngularJS: Filters - Hello </title>
+    <title>AngularJS: Filters </title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -44,31 +44,35 @@
         <div class="col-lg-2"> {{dob | date:'medium'}} </div>
 		    <div class="col-lg-2"> {{1288323623006 | date:'MM/dd/yyyy'}} </div>
       </div>
-    </div>
 
     <br>
 
-    <button ng-click="getEmployees();" class="btn-success"> Get Employees </button>
+      <button ng-click="getEmployees();" class="btn-success"> Get Employees </button>
 
-    <br>
-
-    <table class="table">
-      <thead>
-        <tr>
-          <td>Emp Id</td>
-          <td>Name</td>
-          <td>Age</td>
-          <td>Sal</td>
-          <td>City</td>
+      <br>
+      <strong>Search</strong>
+      <input ng-model="nameFilter">
+      <table class="table">
+        <thead>
+          <tr>
+            <td>Emp Id</td>
+            <td>Name</td>
+            <td>Age</td>
+            <td>Sal</td>
+            <td>City</td>
+            <td>DOB</td>
+          </tr>
+        </thead>
+        <!-- <tr ng-repeat="empObj in employees | filter : {name : 'a', city : 'a'}"> -->
+        <tr ng-repeat="empObj in employees | filter : {name : nameFilter}">
+          <td>{{empObj.id}}</td>
+          <td>{{empObj.name}}</td>
+          <td>{{empObj.age}}</td>
+          <td>{{empObj.sal}}</td>
+          <td>{{empObj.city}}</td>
+          <td> {{empObj.dob | date:'medium'}} </td>
         </tr>
-      </thead>
-      <tr ng-repeat="empObj in employees">
-        <td>{{empObj.id}}</td>
-        <td>{{empObj.name}}</td>
-        <td>{{empObj.age}}</td>
-        <td>{{empObj.sal}}</td>
-        <td>{{empObj.city}}</td>
-      </tr>
-    </table>
+      </table>
+    </div>
   </body>
 </html>

@@ -7,6 +7,7 @@ app.controller('emp', ['$scope', 'calService', '$http', '$log', function($scope,
       $scope.empId = r.id;
       $scope.name = r.name;
       $scope.age = r.age;
+      $scope.dob = r.dob;
       $scope.sal = r.sal;
       $scope.city = r.city;
     });
