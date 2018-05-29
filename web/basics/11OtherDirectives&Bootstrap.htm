@@ -43,6 +43,31 @@
           <div class="col-lg-2"> City </div>
           <div class="col-lg-2"> {{city}} </div>
         </div>
+
+        <br>
+
+        <button ng-click="getEmployees();" class="btn-success"> Get Employees </button>
+
+        <br>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <td>Emp Id</td>
+              <td>Name</td>
+              <td>Age</td>
+              <td>Sal</td>
+              <td>City</td>
+            </tr>
+          </thead>
+          <tr ng-repeat="empObj in employees">
+            <td>{{empObj.id}}</td>
+            <td>{{empObj.name}}</td>
+            <td>{{empObj.age}}</td>
+            <td>{{empObj.sal}}</td>
+            <td>{{empObj.city}}</td>
+          </tr>
+        </table>
     </div>
   </body>
 </html>

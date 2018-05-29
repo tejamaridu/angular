@@ -23,27 +23,52 @@
         <div class="col-lg-2"> Name (View Filter) </div>
         <div class="col-lg-2"> {{name | uppercase}} </div>
       </div>
-      
+
       <div class="row">
         <div class="col-lg-2"> Name (Controller Filter) </div>
         <div class="col-lg-2"> {{NAME}} </div>
       </div>
-	  
+
       <div class="row">
         <div class="col-lg-2"> Salary (View)</div>
         <div class="col-lg-2"> {{sal | number:4}} </div>
       </div>
-	  
+
       <div class="row">
         <div class="col-lg-2"> Salary (View)</div>
         <div class="col-lg-2"> {{sal | currency:"USD":1}} </div>
       </div>
-	  
+
       <div class="row">
         <div class="col-lg-2"> DOB</div>
         <div class="col-lg-2"> {{dob | date:'medium'}} </div>
-		<div class="col-lg-2"> {{1288323623006 | date:'MM/dd/yyyy'}} </div>
+		    <div class="col-lg-2"> {{1288323623006 | date:'MM/dd/yyyy'}} </div>
       </div>
     </div>
+
+    <br>
+
+    <button ng-click="getEmployees();" class="btn-success"> Get Employees </button>
+
+    <br>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <td>Emp Id</td>
+          <td>Name</td>
+          <td>Age</td>
+          <td>Sal</td>
+          <td>City</td>
+        </tr>
+      </thead>
+      <tr ng-repeat="empObj in employees">
+        <td>{{empObj.id}}</td>
+        <td>{{empObj.name}}</td>
+        <td>{{empObj.age}}</td>
+        <td>{{empObj.sal}}</td>
+        <td>{{empObj.city}}</td>
+      </tr>
+    </table>
   </body>
 </html>
