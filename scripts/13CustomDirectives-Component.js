@@ -6,10 +6,6 @@ app.controller('emp', ['$scope', function($scope){
 
 app.directive('myInfoMsg', function(){
   return {
-      // First way
-      // template: '<strong> {{msg}}  </strong>'
-
-      // Second way
       templateUrl: "my-info-msg.html"
-  }
+  };
 });
