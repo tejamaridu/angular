@@ -17,20 +17,23 @@
    <!-- Third way  -->
    <!-- Comment above code and create file with id="my-info-msg.html" and place template code there-->
     <div ng-controller="emp">
-<<<<<<< HEAD
+
       <div my-info-msg>  </div>
       <my-info-msg>  </my-info-msg>
-=======
-      <div my-info-msg>
-      </div>
 
       <br><br><br>
 
-      <div ng-repeat="empObj in employees">
-        <div my-details>
+      <button ng-click="getEmployees();"> Get Employees </button>
+
+      <br>
+
+        <div class="row">
+          <div ng-repeat="empObj in employees">
+            <div class="col-lg-2"> Name </div>
+              <div emp-details>   </div>
+            </div>
         </div>
       </div>
->>>>>>> 9ae323e20d6ca7890ad5337d637424559c20d48e
     </div>
   </body>
 </html>

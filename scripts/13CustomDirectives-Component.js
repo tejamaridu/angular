@@ -1,13 +1,20 @@
 
 var app = angular.module('myApp', []);
-app.controller('emp', ['$scope', function($scope){
+app.controller('emp', ['$scope', 'calService', function($scope, calService){
   $scope.msg = 'This second message';
-  
+
   $scope.getEmployees = function(){
     calService.fetchEmployees(function(r){
       $scope.employees = r;
   });
+}
 }]);
+
+app.directive('empDetails', function(){
+  return {
+      templateUrl: "emp-details.html"
+  };
+});
 
 app.directive('myInfoMsg', function(){
   return {
@@ -22,9 +29,9 @@ app.directive('myInfoMsg', function(){
   };
 });
 
-app.directive('empDetails', function(){
+app.directive('empsInfo', function(){
   return {
-      templateUrl: "emp-details.html"
+      templateUrl: "emps-info.html"
   };
 });
 
