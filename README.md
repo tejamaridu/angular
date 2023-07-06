@@ -1,3 +1,1 @@
-# angulerJSPratice
-AngulerJS practice project
-New change
+# Anguler Setup Project
