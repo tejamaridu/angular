@@ -1,2 +1,27 @@
+<p> Server Id is {{ serverId }} and Server Status is {{ serverStatus}}</p>
+<p>Server Name is {{ 'Server_10' }}</p>
+<p>Server Capacity is {{ getServerCapacity() }}</p>
+
+<p>With $ Event</p> 
+<input type="text" class="form-control" (input)="onServerNameChange($event)">
+
+<p>NgModel</p> 
+<input type="text" class="form-control" [(ngModel)]="serverName">
+
+<p> {{ serverName }}</p>
+
+<button class="btn btn-primary" [disabled]="!allowNewServer" style="margin-right: 15px;" (click)="onServerCreate()"> 
+    New Server 
+</button>
+<button class="btn btn-primary" [disabled]="allowBlink"> Blink </button>
+
+<!-- <p> {{ serverCreationStatus }}</p> -->
+
+
+<p *ngIf="serverCreated; else noServer"> Server is created! Server name is {{ serverName }}</p>
+<ng-template #noServer>
+    <p>No server is created</p>
+</ng-template>
+
 <app-server></app-server>
 <app-server></app-server>
