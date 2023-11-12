@@ -1,3 +1,11 @@
 h3 {
-    color: brown;
+    /* color: brown; */
 }
+
+.online{
+    background-color: lightgreen;
+ }
+
+ .offline{
+    background-color: lightsalmon;
+ }

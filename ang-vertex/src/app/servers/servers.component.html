@@ -2,7 +2,7 @@
 <p>Server Name is {{ 'Server_10' }}</p>
 <p>Server Capacity is {{ getServerCapacity() }}</p>
 
-<p>With $ Event</p> 
+<p>With $ Event</p>
 <input type="text" class="form-control" (input)="onServerNameChange($event)">
 
 <p>NgModel</p> 
@@ -23,5 +23,5 @@
     <p>No server is created</p>
 </ng-template>
 
-<app-server></app-server>
-<app-server></app-server>
+ 
+<app-server *ngFor="let server of servers">{{ server }}</app-server> 

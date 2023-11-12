@@ -18,6 +18,7 @@ export class ServersComponent {
   serverCreationStatus: string = "Server is not created";
   serverCreated: boolean = false;
   serverName: string = "TestServer";
+  servers = ['Server-1', 'Server-2', 'Server-3'];
 
   constructor() {
     setInterval(() => {
@@ -33,8 +34,10 @@ export class ServersComponent {
   }
 
   onServerCreate() {
+    let nextServerName = 'Server-' +(this.servers.length + 1);
     this.serverCreationStatus = "Server has been created! Name is " +this.serverName;
     this.serverCreated = true;
+    this.servers.push(nextServerName);
   }
 
   onServerNameChange(event: Event){

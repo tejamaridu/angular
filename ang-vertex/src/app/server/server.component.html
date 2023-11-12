@@ -1,1 +1,4 @@
-<h3>I am server component</h3>
+<p [ngStyle]="{'color': getColor()}"
+   [ngClass]="serverStatus">
+    I am server component! Status is {{ serverStatus }}
+</p>
