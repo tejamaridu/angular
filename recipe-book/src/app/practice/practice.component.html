@@ -1,0 +1,37 @@
+<div>
+  <a appBasicHighlight class="pad-10">Basic Highlight</a>
+
+  <a appBetterHighlight class="pad-10">Better Highlight</a>
+
+  <a appHoverHighlight [defaultColor]="'gray'" [hoverColor]="'red'" class="pad-10">
+    Hover Highlight
+  </a>
+</div>
+
+<br>
+<button class="btn btn-primary" (click)="toggleNums()">
+    Show {{ showEven ? 'Odd' : 'Even' }}
+</button>
+ 
+<ul *appUnless="!showEven">
+    <li class="list-group-item" style="width: 100px;" 
+        *ngFor="let num of evenNumbers">
+        {{ num }}
+    </li>
+</ul>
+
+<ul *appUnless="showEven">
+    <li class="list-group-item" style="width: 100px;" 
+        *ngFor="let num of oddNumbers">
+        {{ num }}
+    </li>
+</ul>
+
+<h5><strong>NgSwitch</strong></h5>
+<div [ngSwitch]="countNum">
+    <p *ngSwitchCase="10"> Number is 10</p>
+    <p *ngSwitchCase="20"> Number is 20</p>
+    <p *ngSwitchCase="30"> Number is 30</p>
+    <p *ngSwitchCase="40"> Number is 40</p>
+    <p *ngSwitchDefault> Default Number </p>
+</div>

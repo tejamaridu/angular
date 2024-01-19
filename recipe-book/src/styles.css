@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+button {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    margin-right: 10px;
+}
+
+.pad-10 {
+    padding: 10px;
+}
+
+.mar-bottom-10 {
+    margin-bottom: 10px;
+}
+
