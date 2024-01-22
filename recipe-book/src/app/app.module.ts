@@ -14,6 +14,7 @@ import { BetterHighlightDirective } from './directives/better-highlight.directiv
 import { HoverHighlightDirective } from './directives/hover-highlight.directive';
 import { UnlessDirective } from './directives/unless.directive';
 import { PracticeComponent } from './practice/practice.component';
+import { DropdownDirective } from './directives/dropdown.directive';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { PracticeComponent } from './practice/practice.component';
     BetterHighlightDirective,
     HoverHighlightDirective,
     UnlessDirective,
-    PracticeComponent
+    PracticeComponent,
+    DropdownDirective
   ],
   imports: [
     BrowserModule
