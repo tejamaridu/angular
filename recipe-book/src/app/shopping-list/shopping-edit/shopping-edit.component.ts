@@ -19,7 +19,7 @@ export class ShoppingEditComponent {
 
   onAdd() {
     this.selectedIngredient = new Ingredient(this.nameInput.nativeElement.value, Number(this.amountInput.nativeElement.value));
-    this.shoppingService.ingredientAdded.emit(this.selectedIngredient);
+    this.shoppingService.addIngredient(this.selectedIngredient);
     this.logService.logMessage('New ingredient added')
   }
 }
