@@ -25,4 +25,8 @@ export class HomeComponent implements OnInit {
   onLogout() {
     this.authService.logout();
   }
+
+  getLoggedinStatus() {
+    return this.authService.loggedIn;
+  }
 }

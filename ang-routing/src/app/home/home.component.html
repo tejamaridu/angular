@@ -1,12 +1,12 @@
 <h4>Welcome to Server Manager 4.0</h4>
 <p>Manage your Servers and Users.</p>
 
-
 <button class="btn btn-primary" (click)="onLoadServers(1)">Load Servers</button>
-
 
 <button class="btn btn-success" (click)="onLogin()">Login</button>
 
-
 <button class="btn btn-danger" (click)="onLogout()">Logout</button>
 
+<strong style="margin-left: 10px;" [style.color]="getLoggedinStatus() ? 'green' : 'red'">
+    {{ getLoggedinStatus() ? "Logged In" : "Logged Out" }}
+</strong>
