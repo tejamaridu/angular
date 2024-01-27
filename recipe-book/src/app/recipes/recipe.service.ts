@@ -14,6 +14,7 @@ export class RecipeService {
 
   private recipes: Recipe[] = [
     new Recipe(
+      1,
       'Pizza',
       'Pizza is a dish made with cheese, dough',
       'assets/images/pizza.jpg',
@@ -25,6 +26,7 @@ export class RecipeService {
       ]
     ),
     new Recipe(
+      2,
       'Burger',
       'Burger is a dish made with meat, bun',
       'assets/images/burger.jpg',
@@ -38,6 +40,18 @@ export class RecipeService {
 
   getRecipes() {
     return this.recipes.slice();
+  }
+
+  
+  getRecipe(id: number): Recipe {
+    // var recipe: Recipe;
+    // this.recipes.forEach((r1) => {
+    //   if(r1.id === id) {
+    //     recipe = r1;
+    //   }
+    // })
+    // return recipe;
+    return this.recipes[id];
   }
 
   addIngredientsToShoppingList(ingredients: Ingredient[]){

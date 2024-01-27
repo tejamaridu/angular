@@ -15,6 +15,8 @@ import { HoverHighlightDirective } from './directives/hover-highlight.directive'
 import { UnlessDirective } from './directives/unless.directive';
 import { PracticeComponent } from './practice/practice.component';
 import { DropdownDirective } from './directives/dropdown.directive';
+import { AppRoutingModule } from './app-routing.module';
+import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 
 @NgModule({
   declarations: [
@@ -31,10 +33,12 @@ import { DropdownDirective } from './directives/dropdown.directive';
     HoverHighlightDirective,
     UnlessDirective,
     PracticeComponent,
-    DropdownDirective
+    DropdownDirective,
+    RecipeStartComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
