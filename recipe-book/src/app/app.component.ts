@@ -8,9 +8,4 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'recipe-book';
   selectedFeature = 'recipe';
-
-  onNavigate(selectedFeature: string) {
-    this.selectedFeature = selectedFeature;
-  }
-
 }
