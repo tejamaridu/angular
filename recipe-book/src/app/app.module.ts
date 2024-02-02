@@ -19,6 +19,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ShortenPipe } from './shared/shorten.pipe';
+import { FilterPipe } from './shared/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     PracticeComponent,
     DropdownDirective,
     RecipeStartComponent,
-    RecipeEditComponent
+    RecipeEditComponent,
+    ShortenPipe,
+    FilterPipe
   ],
   imports: [
     BrowserModule,

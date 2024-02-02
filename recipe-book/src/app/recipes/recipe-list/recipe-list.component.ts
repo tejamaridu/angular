@@ -12,9 +12,15 @@ import { Subscription } from 'rxjs';
 export class RecipeListComponent implements OnInit, OnDestroy {
   recipes: Recipe[];
   subscription: Subscription;
+  filteredStatus: string = '';
+  appStatus = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('stable');
+    }, 2000);
+  });
 
-  constructor(private recipeService: RecipeService, private router: Router, private route: ActivatedRoute) { 
-
+  constructor(private recipeService: RecipeService, private router: Router, 
+    private route: ActivatedRoute) { 
   }
 
   ngOnInit() {

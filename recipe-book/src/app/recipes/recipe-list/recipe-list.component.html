@@ -3,10 +3,12 @@
     <button class="btn btn-primary" (click)="onNewRecipe()">New Recipe</button>
   </div>
 </div>
-
+<hr>
+<input type="text" class="form-control" [(ngModel)]="filteredStatus" placeholder="Filter">
+<hr>
 <div class="row">
   <div class="col-xs-12">
-    <app-recipe-item *ngFor="let recipeEl of recipes; let i = index"
+    <app-recipe-item *ngFor="let recipeEl of recipes | filter:filteredStatus:'name'; let i = index;"
                      [recipe] = recipeEl
                      [index]="i">
     </app-recipe-item>
