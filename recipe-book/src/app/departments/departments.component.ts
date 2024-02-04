@@ -3,6 +3,7 @@ import { DepartmentsService } from './departments.service';
 import { Department } from './department.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-departments',
@@ -11,44 +12,46 @@ import { Subscription } from 'rxjs';
 })
 export class DepartmentsComponent implements OnInit, OnDestroy {
   departments: Department[];
-  @HostBinding('deptForm') deptForm: FormGroup;
+  selectedDepartment : Department;
   isFetching: boolean = false;
-  isEdit: boolean = false;
-  deptSubscription: Subscription;
+  deptFetchSub: Subscription;
 
-  constructor(private depatmentsService: DepartmentsService) {}
+  constructor(private depatmentsService: DepartmentsService, private route: ActivatedRoute,
+    private router: Router) {
+      console.log('In Parent Constructor');
+      
+    }
 
   ngOnInit() {
-    this.deptForm = new FormGroup({
-      name: new FormControl('', Validators.required),
-      head: new FormControl('', Validators.required),
-    });
+    console.log('In Parent Init');
     this.fetchDepartments();
   }
 
   fetchDepartments() {
-    this.deptSubscription = this.depatmentsService.getDepartments().subscribe((data: Department[]) => {
-      this.departments = data;
-      console.log(data);
-    });
+    this.deptFetchSub = this.depatmentsService.getDepartments()
+      .subscribe((depts: Department[]) => {
+        this.departments = depts;
+
+        // Inserting Data into Departments Map
+        // const deptsMap: { [key: string]: Department } = {};
+        // depts.forEach(dept => {
+        //   deptsMap[dept.uuid] = dept;
+        // });
+        // this.depatmentsService.departmentsMap = deptsMap;
+      });
+  }
+
+  onDepartmentSelect(dept: Department) {
+    this.selectedDepartment = dept;
+    // Send the selected department to Edit Component
+    this.router.navigate([this.selectedDepartment.uuid], { relativeTo: this.route});
   }
 
   createDepartment() {
      // this.depatmentsService.createDepartment(this.department); 
   }
 
-  onDeptSubmit() {
-    this.depatmentsService.createDepartment(this.deptForm.value).subscribe(
-      (data: any) => {
-        alert('Department Created!');
-        this.fetchDepartments();
-        this.deptForm.reset();
-    }, (err) => {
-      
-    });
-  }
-
   ngOnDestroy(): void {
-    this.deptSubscription.unsubscribe();
+    this.deptFetchSub.unsubscribe();
   }
 }

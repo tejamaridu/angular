@@ -1,0 +1,19 @@
+<div *ngIf="deptForm != null">
+  <form [formGroup]="deptForm" (ngSubmit)="onDeptSubmit()" >
+      <hr> {{!isEdit}}
+      <label for="name">Your Name</label>
+      <input type="text" class="form-control" formControlName="name" [readonly]="!isEdit">
+      <br>
+      <label for="head">Head Name</label>
+      <input type="text" class="form-control" formControlName="head" [readonly]="!isEdit">
+      <hr>
+      <button class="btn btn-success" type="submit"  *ngIf="selectedDepartment.uuid == '' || isEdit"> 
+        {{ isEdit ? 'Update' : 'Create'}}
+      </button>
+      <button class="btn btn-warning" type="button" *ngIf="selectedDepartment.uuid != '' && isEdit" (click)="onEditCancel()" > Cancel </button>
+      <button class="btn btn-danger" type="button" (click)="onDelete()" 
+        *ngIf="selectedDepartment.uuid != ''"> Delete </button>
+      <button class="btn btn-primary" type="button" (click)="onEdit()" 
+        *ngIf="selectedDepartment.uuid != '' && !isEdit"> Edit </button>
+  </form>
+</div>

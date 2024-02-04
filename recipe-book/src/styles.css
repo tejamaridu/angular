@@ -14,3 +14,6 @@ button {
     margin-bottom: 10px;
 }
 
+.pointer:hover{
+    cursor: pointer;
+}

@@ -23,6 +23,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ShortenPipe } from './shared/shorten.pipe';
 import { FilterPipe } from './shared/filter.pipe';
 import { DepartmentsComponent } from './departments/departments.component';
+import { DepartmentEditComponent } from './departments/edit-department/department-edit.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { DepartmentsComponent } from './departments/departments.component';
     RecipeEditComponent,
     ShortenPipe,
     FilterPipe,
-    DepartmentsComponent
+    DepartmentsComponent,
+    DepartmentEditComponent
   ],
   imports: [
     BrowserModule,
