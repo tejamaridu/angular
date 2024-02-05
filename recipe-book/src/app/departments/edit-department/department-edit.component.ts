@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DepartmentsService } from '../departments.service';
 import { Department } from '../department.model';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-department-edit',
@@ -12,11 +12,10 @@ import { Subscription } from 'rxjs';
 })
 export class DepartmentEditComponent implements OnInit, OnDestroy {
   @HostBinding('deptForm') deptForm: FormGroup;
-  selectedDepartment: Department;
-  deptFetchSub: Subscription;
+  selectedDepartment: Department; 
   selectedDeptUuid: string;
   isEdit: boolean = false;
-  newMode: boolean = false;
+  isNew: boolean = false;
 
   constructor(private deptService: DepartmentsService, private route: ActivatedRoute,
     private router: Router) {
@@ -25,11 +24,14 @@ export class DepartmentEditComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     console.log('In Child Init');
-    this.route.params.subscribe((params: Params) => {
-      this.selectedDepartment = new Department('', '', '');
+    this.deptService.deptSubscriptions.push(
+      this.route.params.subscribe((params: Params) => {
+      // Checking if its URL have new
+      const segments = this.route.snapshot.url;
+      this.isNew = segments.some(segment => segment.path === 'new');
       this.selectedDeptUuid = params['id'];
       this.depatmentFormInit();
-    });
+    }));
   }
 
   // depatmentFormInitNotWorking() {
@@ -49,10 +51,12 @@ export class DepartmentEditComponent implements OnInit, OnDestroy {
 
   depatmentFormInit() {
     if (this.selectedDeptUuid != '') {
-      this.deptService.getDepartment(this.selectedDeptUuid)
+      this.deptService.deptSubscriptions.push(
+        this.deptService.getDepartment(this.selectedDeptUuid)
         .subscribe((dept: Department) => {
           if (dept == null || dept.uuid == null) {
             this.selectedDepartment = new Department('', '', '');
+            this.isEdit = true;
           } else {
             this.selectedDepartment = dept;
           }
@@ -60,22 +64,48 @@ export class DepartmentEditComponent implements OnInit, OnDestroy {
             name: new FormControl( this.selectedDepartment.name, Validators.required ),
             head: new FormControl( this.selectedDepartment.head, Validators.required ),
           });
-        });
+        }));
     }
   }
 
   onDeptSubmit() {
-    this.deptService.createDepartment(this.deptForm.value).subscribe(
-      (data: any) => {
-        this.fetchDepartments(); 
-      },
-      (err) => {}
-    );
+    if(this.isNew) {
+      this.deptService.deptSubscriptions.push(
+        this.deptService.createDepartment(this.deptForm.value).subscribe(
+        (dept: Department) => {
+          console.log(dept);
+          this.router.navigate(['departments/'+dept.uuid]);
+          this.fetchDepartments(); 
+        },
+        (err) => {
+          console.log(err);
+        }
+      ));
+    } else {
+      this.deptService.deptSubscriptions.push(
+        this.deptService.editDepartment(this.selectedDeptUuid, this.deptForm.value).subscribe(
+        (data: any) => {
+          this.fetchDepartments(); 
+        },
+        (err) => {
+          console.log(err);
+        }
+      ));
+    }
+    
     this.isEdit = false;
   }
 
   fetchDepartments() {
-    // :TODO
+    this.deptService.deptSubscriptions.push(
+      this.deptService.getDepartments().subscribe((depts: Department[]) => {
+        this.deptService.departmentsUpdated.next(depts);
+      }))
+  }
+
+  onNewInit() {
+    this.isEdit = true;
+    this.router.navigate(['departments/new']);
   }
 
   onEdit() {
@@ -90,11 +120,31 @@ export class DepartmentEditComponent implements OnInit, OnDestroy {
     this.isEdit = false;
   }
 
-  onDelete() {
+  onDeleteInit() {
 
   }
 
+  onDelete() {
+    const isDelete = confirm('Are you sure you want to delete?');
+    if(isDelete){
+      this.deptService.deptSubscriptions.push(
+          this.deptService.deleteDepartment(this.selectedDeptUuid)
+          
+          
+          .subscribe((data: any) => {
+          this.fetchDepartments();
+          this.router.navigate(['departments']);
+          this.isEdit = false;
+          this.isNew = false;
+        }
+        ,(error: any) => {
+          console.log(error);
+        }
+      ))
+    }
+  }
+
   ngOnDestroy(): void {
-    this.deptFetchSub.unsubscribe();
+    // this.deptFetchSub.unsubscribe();
   }
 }

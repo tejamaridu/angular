@@ -17,3 +17,18 @@ button {
 .pointer:hover{
     cursor: pointer;
 }
+
+label{
+    font-weight: bold;
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    background-color: cornflowerblue;
+  }
+
+  .my-container {
+    padding-right: 15px;
+    padding-left: 15px;
+    /* margin-right: auto; */
+    /* margin-left: auto; */
+}
