@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -24,7 +24,9 @@ import { ShortenPipe } from './shared/shorten.pipe';
 import { FilterPipe } from './shared/filter.pipe';
 import { DepartmentsComponent } from './departments/departments.component';
 import { DepartmentEditComponent } from './departments/edit-department/department-edit.component';
-
+import { AuthInterceptorService } from './interceptors/auth-interceptor.service';
+import { LoggingInterceptorService } from './interceptors/logging-interceptor.service';
+ 
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,7 +57,16 @@ import { DepartmentEditComponent } from './departments/edit-department/departmen
     ReactiveFormsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS, 
+    useClass: AuthInterceptorService,
+    multi: true      
+  },
+  {
+    provide: HTTP_INTERCEPTORS, 
+    useClass: LoggingInterceptorService,
+    multi: true      
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

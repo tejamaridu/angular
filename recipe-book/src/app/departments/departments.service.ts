@@ -1,8 +1,8 @@
 import { Injectable, OnDestroy, OnInit } from '@angular/core';
 import { Department } from './department.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEventType, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, Subject, Subscription, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class DepartmentsService {
 
   constructor(private http: HttpClient) { 
     console.log('In Service Constructor');
-    this.fillDepartmentsMap();
+    // this.fillDepartmentsMap();
   }
 
   ngOnInit(): void {
@@ -58,7 +58,18 @@ export class DepartmentsService {
   // }
 
   getDepartment(uuid: string): Observable<Department>{
-    return <Observable<Department>>this.http.get('http://localhost:8080/api/v1/departments/' + uuid);
+    const headers = new HttpHeaders()
+      .set('Authorization', 'your_token')
+      .set('Content-Type', 'application/json');
+    const params = new HttpParams()
+      .set('view', 'pretty');
+    return <Observable<Department>> this.http.get('http://localhost:8080/api/v1/departments/' + uuid, 
+      { 
+        headers, 
+        params, 
+        observe: 'body'
+      }, 
+    ) 
   }
 
   private fillDepartmentsMap() {
@@ -80,10 +91,14 @@ export class DepartmentsService {
   }
 
   deleteDepartment(deptUuid: string){
-    return this.http.delete('http://localhost:8080/api/v1/departments/' +deptUuid)
-    .pipe(catchError((error) => {
-      console.log(error);
-      return throwError(() => new Error('Department deletion unsuccessful!'));
+    return this.http.delete('http://localhost:8080/api/v1/departments/' +deptUuid, {
+      observe: 'events'
+    })
+    .pipe(
+      tap(event => {
+        if(event.type === HttpEventType.Response){
+          console.log(event.body);
+        }
     }));
   }
  
