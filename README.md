@@ -1,1 +1,0 @@
-# Anguler Setup Project
